@@ -44,10 +44,10 @@ var showQuestion = function(question) {
 	// set some properties related to asker
 	var asker = result.find('.asker');
 	asker.html('<p>Name: <a target="_blank" href=http://stackoverflow.com/users/' + question.owner.user_id + ' >' +
-													question.owner.display_name +
-												'</a>' +
-							'</p>' +
- 							'<p>Reputation: ' + question.owner.reputation + '</p>'
+		question.owner.display_name +
+		'</a>' +
+		'</p>' +
+		'<p>Reputation: ' + question.owner.reputation + '</p>'
 	);
 
 	return result;
@@ -74,9 +74,9 @@ var getUnanswered = function(tags) {
 	
 	// the parameters we need to pass in our request to StackOverflow's API
 	var request = {tagged: tags,
-								site: 'stackoverflow',
-								order: 'desc',
-								sort: 'creation'};
+		site: 'stackoverflow',
+		order: 'desc',
+		sort: 'creation'};
 	
 	var result = $.ajax({
 		url: "http://api.stackexchange.com/2.2/questions/unanswered",
@@ -84,6 +84,7 @@ var getUnanswered = function(tags) {
 		dataType: "jsonp",
 		type: "GET",
 		})
+
 	.done(function(result){
 		var searchResults = showSearchResults(request.tagged, result.items.length);
 
@@ -108,19 +109,27 @@ var getAnswerer = function(tags) {
 		dataType: "jsonp",
 		type: "GET",
 		})
-	// .done(function(result){
-	// 	var searchResults = showSearchResults(request.tagged, result.items.length);
-
-	// 	$('.search-results').html(searchResults);
 
 	// 	// Need to create a new function here to create 
 	// 	// a showAnswerer fuction that works like the showQuestion function above. 
 
-		// $.each(result.items, function(i, item) {
-		// 	var question = showQuestion(item);
-		// 	$('.results').append(question);
-	// 	});
-	// })
+	var showAnswerer = function(answerers) {
+	
+	// clone our result template code
+	var result = $('.templates .answerer').clone();
+	
+	// set the link display name and profile property in result
+	var profile = result.find('.profile');
+	answererElem.attr('href', answerer.link);
+	answererElem.text(answerer.display_name);
+	);
+
+	// set the reputaiton for answerer property in result
+	var viewed = result.find('.reputaton');
+	viewed.text(question.reputaton);
+
+	return result;
+};
 	.fail(function(jqXHR, error, errorThrown){
 		var errorElem = showError(error);
 		$('.search-results').append(errorElem);
