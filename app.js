@@ -125,19 +125,19 @@ var getAnswerer = function(tags) {
 	// 	// Need to create a new function here to create 
 	// 	// a showAnswerer fuction that works like the showQuestion function above. 
 
-var showAnswerer = function(answerers) {
+var showAnswerer = function(person) {
 
 	// clone our result template code
 	var result = $('.templates .answerer').clone();
 	
 	// set the link display name and profile property in result
 	var profile = result.find('.profile a');
-	answererElem.attr('href', answerer.link);
-	answererElem.text(answerer.display_name);
+	profile.attr('href', person.user.link);
+	profile.text(person.user.display_name);
 
 	// set the reputaiton for answerer property in result
-	var viewed = result.find('.reputaton');
-	viewed.text(question.reputaton);
+	var view = result.find('.reputation');
+	view.text(person.user.reputation);
 
 	return result;
-}
+};
